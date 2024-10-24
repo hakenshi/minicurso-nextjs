@@ -2,9 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import {db} from "../../../../prisma/db";
 
-export default async function NoticiaPage({params}: {params: {id:string}}){
+type PageProps = {
+    params: {
+        id: string
+    }
+}
+
+export default async function NoticiaPage({params}: PageProps){
 
     const noticia = await db.noticias.findUnique({where:{id: params.id}})
+
     return (
         <div className='container mx-auto px-4 py-8'>
             <article className='bg-white shadow-md rounded-lg overflow-hidden'>
