@@ -1,16 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import {db} from "../../../../prisma/db";
+import {redirect} from "next/navigation";
 
-type PageProps = {
+interface PageProps = {
     params: {
         id: string
     }
 }
 
-export default async function NoticiaPage({params}: PageProps){
+export default async function NoticiaPage({params}: PageProps) {
 
-    const noticia = await db.noticias.findUnique({where:{id: params.id}})
+    const noticia = await db.noticias.findUnique({where: {id: params.id}})
+
+    if (!noticia) {
+        redirect('/')
+        return null
+    }
 
     return (
         <div className='container mx-auto px-4 py-8'>
