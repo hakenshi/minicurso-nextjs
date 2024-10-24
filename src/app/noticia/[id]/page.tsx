@@ -4,9 +4,7 @@ import {db} from "../../../../prisma/db";
 
 export default async function NoticiaPage({params}: {params: {id:string}}){
 
-    const urlParams = await params
-
-    const noticia = await db.noticias.findUnique({where:{id: urlParams.id}})
+    const noticia = await db.noticias.findUnique({where:{id: params.id}})
     return (
         <div className='container mx-auto px-4 py-8'>
             <article className='bg-white shadow-md rounded-lg overflow-hidden'>
