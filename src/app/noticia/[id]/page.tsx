@@ -3,7 +3,7 @@ import Link from "next/link";
 import {db} from "../../../../prisma/db";
 import {redirect} from "next/navigation";
 
-interface PageProps = {
+interface PageProps {
     params: {
         id: string
     }
