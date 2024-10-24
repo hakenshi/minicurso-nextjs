@@ -4,14 +4,14 @@ import {db} from "../../../../prisma/db";
 import {redirect} from "next/navigation";
 
 interface PageProps {
-    params: {
+    params: Promise<{
         id: string
-    }
+    }>
 }
 
 export default async function NoticiaPage({params}: PageProps) {
 
-    const noticia = await db.noticias.findUnique({where: {id: params.id}})
+    const noticia = await db.noticias.findUnique({where: {id: (await params).id}})
 
     if (!noticia) {
         redirect('/')
